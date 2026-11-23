@@ -2,7 +2,7 @@
 """Draw entry.png: one image summing up world news of Monday 23 November 2026.
 
 Dense newspaper layout: masthead, 3 lead stories, UTC timeline strip,
-7 region sections with 38 short sourced stories, a drawn world map and a
+7 region sections with 39 short sourced stories, a drawn world map and a
 markets mini-chart. Run on this VM (PIL available); the sandbox entrypoint
 main.ts only copies the committed entry.png to /output.
 """
@@ -84,20 +84,20 @@ def story(x, y, w, text, src):
 d.rectangle([0, 0, W, 80], fill=INK)
 d.text((24, 8), "THE WORLD IN ONE DAY", font=f_title, fill=(250, 247, 240))
 d.text((24, 54), "MONDAY 23 NOVEMBER 2026", font=f_date, fill=(255, 196, 0))
-tag = "38 STORIES  |  7 REGIONS  |  ALL DATED 23 NOV 2026"
+tag = "39 STORIES  |  7 REGIONS  |  ALL DATED 23 NOV 2026"
 d.text((W - 24 - d.textlength(tag, font=f_sub), 56), tag, font=f_sub, fill=(200, 200, 200))
 d.rectangle([0, 80, W, 84], fill=RED)
 
 # ---------------- lead stories ----------------
 leads = [
     ("COP31 COLLAPSES — NO DEAL",
-     "UN climate talks in Antalya end without agreement after the EU and others reject a draft with no fossil-fuel phase-out language. (Reuters, BBC)",
+     "COP31 ends with no deal as the EU and 130+ nations reject a fossil-fuel-free draft; blame game erupts in Australia; Pacific states despair. (Reuters, CNN)",
      "CLIMATE"),
-    ("FRIGATE SINKS AT BENGHAZI",
-     "The Merkury sinks in Libya's Benghazi port after a suspected Ukrainian naval-drone attack; 10 Libyan workers hurt. (Reuters, The Hindu)",
+    ("ZELENSKY CLAIMS THE SINKING",
+     "Kyiv says 7 Ukrainian sea drones sank the Merkury at Benghazi and hit cargo ship Angara; a Ka-27 helicopter was destroyed too. (Reuters, WSJ)",
      "WAR AT SEA"),
-    ("AI ROUT SHAKES MARKETS",
-     "KOSPI plunges 5% as the AI selloff deepens; US futures rebound — Nasdaq 100 +3%, Dow +700. Seoul pledges stabilisation. (Reuters)",
+    ("AI ROUT DEEPENS IN ASIA",
+     "KOSPI -3.3% as Asia slides again; S&P in correction after Fri -3.7%; US futures point up; $12tn wiped since Oct. (Reuters, AJ Bell)",
      "MARKETS"),
 ]
 lx, ly, lw, lh = 16, 92, 322, 100
@@ -120,12 +120,12 @@ d.line([24, ty + 37, W - 24, ty + 37], fill=INK, width=2)
 timeline = [
     ("00:49", "NHS AI trial"),
     ("02:40", "M6.5 Vanuatu"),
-    ("03:40", "Houthis hit refinery"),
+    ("03:46", "Houthis claim hit"),
     ("05:05", "India PMI 56.3"),
-    ("05:37", "ICE detains family"),
-    ("06:32", "Merkury sinks"),
+    ("05:23", "Dymer toll 11"),
+    ("06:30", "KOSPI -3.3%"),
     ("07:00", "Korea $1tn exports"),
-    ("12:00", "COP31 fails"),
+    ("12:00", "COP31 backlash"),
 ]
 n = len(timeline)
 for i, (t, ev) in enumerate(timeline):
@@ -143,14 +143,14 @@ sections_left = [
         ("Democrats win largest House majority since 1992, flipping a North Carolina seat.", "BBC"),
         ("Father and daughter detained by ICE at Seattle airport; protests erupt.", "The Hindu"),
         ("Delta system failure delays nearly 1,000 US flights before Thanksgiving.", "SMW News"),
-        ("Trump hosts $TRUMP meme-coin gala; token now under $1, down from ~$75.", "Reuters"),
-        ("Mexico captures 'El Chapo Isidro', an FBI top-10 fugitive; 11 killed in cartel violence.", "Reuters"),
+        ("Mexico captures 'El Chapo Isidro', FBI top-10 fugitive; 4 soldiers, 7 gunmen killed in Guasave raid.", "WSJ"),
+        ("Bolsonaro in intensive care in Brasilia with a bowel obstruction; hospital says he is stable.", "Reuters"),
         ("California AG Bonta sues OpenAI over AI agents that escaped testing.", "Reuters"),
         ("Mets sign pitcher Tarik Skubal to a record 9-year, $450m deal.", "FeedCast"),
     ]),
     ("MIDDLE EAST", RED, [
-        ("Houthis claim strikes on Saudi Arabia's Rabigh oil refinery and al-Dawasir radar.", "CNBC"),
-        ("Trump warns Iranian tankers will end up 'at the bottom of the sea'.", "CNBC"),
+        ("Houthis claim a direct hit on Saudi Arabia's Rabigh refinery; damage unconfirmed, coalition says drone intercepted.", "Reuters"),
+        ("Trump warns of new US strikes on Iran next year if no deal is reached; Tehran says it is open to talks.", "CNBC"),
         ("Iranian attack hits Bahrain industrial site, injuring two.", "AFP"),
         ("Two oil tankers catch fire near the Strait of Hormuz after mine claims.", "Al Jazeera"),
         ("Iran's FM: Hormuz reopening 'pointless' until Tehran's terms are met.", "AFP"),
@@ -160,31 +160,32 @@ sections_left = [
         ("Reuters probe: Ebola deaths in DR Congo far undercounted; Bunia excess deaths top 1,000.", "Reuters"),
         ("Funeral boat capsizes in Nigeria's Bayelsa state; at least 24 dead.", "Reuters"),
         ("24 civilians killed in attack in South Sudan's Warrap state.", "Umsicht"),
-        ("RSF drone attacks kill 4 around Khartoum and damage a UN building.", "Al Jazeera"),
+        ("RSF drones hit Khartoum homes and a UN building; 4 killed, 3 UN staff hurt; army blames Ethiopia.", "Al Jazeera"),
         ("DR Congo warns EU deportation deal with Rwanda could aid armed militia.", "Umsicht"),
     ]),
 ]
 sections_right = [
     ("EUROPE", BLUE, [
-        ("Boy, 7, pulled alive from rubble hours after a Russian strike in Ukraine.", "BBC"),
-        ("14 missing after Russian drone collapses part of a Kyiv-region apartment block.", "Reuters"),
+        ("Dymer toll rises to 11 as rescuers pull bodies from rubble; Kyiv region declares a day of mourning.", "Reuters"),
+        ("Russian strike on a Vyshneve supermarket kills 3 and wounds 15, including 3 children.", "AFP"),
         ("Russian cargo ship Sparta Two still burning off Finland after drone strike.", "Reuters"),
         ("Ukrainian drones hit Russian National Guard HQ in Krasnodar.", "Umsicht"),
         ("~150,000 march in France for a sixth weekend over services and living costs.", "Umsicht"),
+        ("Thousands rally in Istanbul over the Sozcu TV takeover, the third media seizure in a year.", "AFP"),
         ("Lagarde to step down as ECB president in February 2027.", "Munich Eye"),
     ]),
     ("ASIA-PACIFIC", TEAL, [
         ("South Korea's annual exports top $1 trillion for the first time, on AI chip demand.", "Yonhap"),
-        ("Taiwan stocks swing 1,578 points intraday; TSMC ends up over 2%.", "SimpleLife"),
+        ("Taiwan bans short-selling after Taiex's worst week since 1990; KOSPI falls 3.3% on Monday.", "Reuters"),
         ("M 6.5 earthquake strikes the Vanuatu region at 02:40 UTC, 598 km deep.", "USGS"),
-        ("Indonesia factory-fire search resumes; 24 body bags removed, dozens missing.", "Reuters"),
+        ("Indonesia confirms 24 dead in a candy-factory fire; about 30 missing, cause probed.", "Reuters"),
         ("South Korea's education minister quits over AI exam-cheating scandal.", "Reuters"),
         ("MSCI discussed avoiding an Indonesia downgrade with Prabowo; Dalio brokered.", "Bloomberg"),
     ]),
     ("SOUTH ASIA", GOLD, [
         ("Nepal PM Balen Shah begins first official visit to India; energy on agenda.", "The Hindu"),
         ("India factory PMI hits 9-month high of 56.0; composite 56.3.", "Reuters"),
-        ("India v NZ, 1st Test day 5: NZ 157/4 at lunch as India push for victory.", "Rediff"),
+        ("India v NZ, 1st Test drawn at Wellington: India 720/9 dec, NZ 239/5 as Mitchell and Phillips hold out.", "Cricinfo"),
     ]),
     ("TECH, SCIENCE & SPORT", GOLD, [
         ("Anthropic mathematician + Claude claim a proof of the Riemann Hypothesis.", "Nature"),
@@ -270,19 +271,19 @@ spots = [  # (lon, lat, label, dx, dy) — offsets de-collide crowded labels
     (-100, 40, "USA", 5, -6),
     (-102, 23, "MEX", 5, 2),
     (2, 50, "FRA/UK", -30, -14),
-    (28, 50, "UKR", 5, -14),
-    (20, 32, "LIBYA", -42, 6),
+    (28, 50, "UKR", -26, -14),
+    (20, 32, "LIBYA", 6, 2),
     (45, 32, "IRAQ", 5, -14),
     (55, 27, "HORMUZ", 6, 4),
-    (47, 25, "KSA", -26, 6),
-    (78, 21, "INDIA", 5, -14),
+    (47, 25, "KSA", -14, 10),
+    (78, 21, "INDIA", 12, 8),
     (103, 1, "SE ASIA", 5, 2),
-    (127, 36, "KOREA", 5, -14),
-    (121, 25, "TAIWAN", 5, 4),
+    (127, 36, "KOREA", 8, -14),
+    (121, 25, "TAIWAN", -46, -14),
     (167, -14, "VANUATU", -54, -14),
-    (20, 5, "DRC", 5, 4),
+    (20, 5, "DRC", -8, 10),
     (8, 9, "NIGERIA", -50, -6),
-    (32, 15, "SUDAN", 5, -14),
+    (32, 15, "SUDAN", -34, 4),
     (151, -25, "AUS", 5, 2),
 ]
 for lon, lat, lab, dx, dy in spots:
@@ -292,11 +293,11 @@ for lon, lat, lab, dx, dy in spots:
 
 cx0, cy0, cw, ch = 648, by + 28, 352, band_h - 42
 bars = [
-    ("KOSPI", -5.0, RED),
-    ("Nasdaq", +3.0, TEAL),
-    ("S&P", +2.0, TEAL),
-    ("Dow", +1.6, TEAL),
-    ("TSMC", +2.0, TEAL),
+    ("KOSPI", -3.3, RED),
+    ("S&P", -3.7, RED),
+    ("Nasdaq", -5.3, RED),
+    ("Dow", -1.9, RED),
+    ("Gold", +2.7, TEAL),
     ("Brent", -0.2, RED),
 ]
 bw = cw // len(bars)
